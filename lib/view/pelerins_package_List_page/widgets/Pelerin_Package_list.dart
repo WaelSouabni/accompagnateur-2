@@ -22,7 +22,7 @@ class _PelerinListState extends State<PelerinListWidget> {
         centerTitle: true,
         title: Text(
           "قائمة المعتمرين التابعين لهذه الرحلة",
-          style: TextStyle(color: Colors.black),
+          style: TextStyle(color: Colors.white),
         ),leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Color.fromARGB(255, 0, 0, 0)),
           onPressed: () => Navigator.pop(context),
@@ -87,7 +87,7 @@ class _PelerinListState extends State<PelerinListWidget> {
                                     PelerinName: Accompgnateur.nomArabe +
                                         " " +
                                         Accompgnateur.prenomArabe,
-                                    PelerinEtat: Accompgnateur.etat),
+                                    PelerinEtat: Accompgnateur.etat, telephone: Accompgnateur.telephoneTunisien,),
                                 
                                 PelerinImage(
                                     PelerinImg:

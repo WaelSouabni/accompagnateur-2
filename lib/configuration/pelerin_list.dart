@@ -11,7 +11,7 @@ Future<List<Pelerin>> bringThePelerinAccompgnateur() async {
   SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
 
   var response = await http.get(
-    Uri.parse('http://localhost:8000/api/Mobile/pelerinaccom/${sharedPreferences.getInt("idUser").toString()}'),
+    Uri.parse('http://localhost:8000/api/Mobile/listPelerinsAccompm/${sharedPreferences.getInt("idUser").toString()}'),
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
       'Access-Control-Allow-Origin': '*',
@@ -19,8 +19,10 @@ Future<List<Pelerin>> bringThePelerinAccompgnateur() async {
   );
 
   var data = await json.decode(response.body)['pelerins'] as List;
+  print(data);
 
   PelerinsList = data.map((i) => Pelerin.fromJson(i)).toList();
+
 
   return PelerinsList;
 }
@@ -32,7 +34,7 @@ Future<List<Pelerin>> bringThePelerinvol() async {
   SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
 
   var response = await http.get(
-    Uri.parse('http://localhost:8000/api/Mobile/volpelerin/' +
+    Uri.parse('http://localhost:8000/api/Mobile/listPelerinsPackage/' +
         sharedPreferences.getInt("idPackage").toString()),
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
@@ -40,7 +42,7 @@ Future<List<Pelerin>> bringThePelerinvol() async {
     },
   );
 
-  var data = await json.decode(response.body)['pelerins'] as List;
+  var data = await json.decode(response.body)["pelerins"] as List;
   print(data);
   PelerinsList = data.map((i) => Pelerin.fromJson(i)).toList();
 

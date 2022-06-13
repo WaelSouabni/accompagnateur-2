@@ -2,8 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../../../configuration/food.dart';
-import '../../../configuration/food_list.dart';
+
 import '../../home_page/components/size_config.dart';
 
 class DiscountCard extends StatefulWidget {

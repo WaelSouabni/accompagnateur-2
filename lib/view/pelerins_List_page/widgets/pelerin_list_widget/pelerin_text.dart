@@ -5,7 +5,8 @@ import 'package:flutter/material.dart';
 class PelerinText extends StatefulWidget {
   String PelerinName;
   String PelerinEtat;
-  PelerinText({Key? key, required this.PelerinName, required this.PelerinEtat}) : super(key: key);
+  String telephone;
+  PelerinText({Key? key, required this.PelerinName, required this.PelerinEtat, required this.telephone}) : super(key: key);
 
   @override
   _PelerinTextState createState() => _PelerinTextState();
@@ -24,17 +25,40 @@ class _PelerinTextState extends State<PelerinText> {
         ),
         SizedBox(height: SizeConfig.screenHeight!/341.5),        /// 2.0
         Text.rich(
+            (widget.PelerinEtat =='0')?
+    TextSpan(
+        text: "مرفوض",
+        style: TextStyle(
+            fontWeight: FontWeight.w600, color: buttonColor, fontSize: SizeConfig.screenHeight!/37.95   /// 18
+        ),
+        children: [
           TextSpan(
-            text: "${widget.PelerinEtat}",
+              text: ' - ${widget.telephone}',
+              style: Theme.of(context).textTheme.bodyText1),
+        ],
+      ):  (widget.PelerinEtat =='1')?
+        TextSpan(
+            text: "في الانتظار",
             style: TextStyle(
                 fontWeight: FontWeight.w600, color: buttonColor, fontSize: SizeConfig.screenHeight!/37.95   /// 18
             ),
             children: [
               TextSpan(
-                  text: " ",
+                   text: ' - ${widget.telephone}',
                   style: Theme.of(context).textTheme.bodyText1),
             ],
-          ),
+          )
+          :TextSpan(
+                text: "مؤكد",
+                style: TextStyle(
+                    fontWeight: FontWeight.w600, color: buttonColor, fontSize: SizeConfig.screenHeight!/37.95   /// 18
+                ),
+                children: [
+                  TextSpan(
+                        text: ' - ${widget.telephone}',
+                      style: Theme.of(context).textTheme.bodyText1),
+                ],
+              ),
         ),
       ],
     );
