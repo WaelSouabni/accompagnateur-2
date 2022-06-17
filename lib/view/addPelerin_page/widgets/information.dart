@@ -74,6 +74,7 @@ class _InformationState extends State<Information> {
             SizeConfig.screenWidth! / 20.55,
             SizeConfig.screenHeight! / 34.15),
         child: TextField(
+           textAlign: TextAlign.right,
           style: TextStyle(color: textColor),
           cursorColor: textColor,
           controller: prenomController,
@@ -117,6 +118,7 @@ class _InformationState extends State<Information> {
             SizeConfig.screenWidth! / 20.55,
             SizeConfig.screenHeight! / 34.15),
         child: TextField(
+           textAlign: TextAlign.right,
           style: TextStyle(color: textColor),
           cursorColor: textColor,
           controller: nomController,

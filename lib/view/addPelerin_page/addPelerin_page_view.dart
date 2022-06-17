@@ -3,6 +3,7 @@ import 'package:accompagnateur/view/addPelerin_page/widgets/Compte.dart';
 import 'package:accompagnateur/view/addPelerin_page/widgets/background_image.dart';
 import 'package:accompagnateur/view/addPelerin_page/widgets/information.dart';
 import 'package:accompagnateur/view/addPelerin_page/widgets/passeport.dart';
+import 'package:accompagnateur/view/home_page/home_page_view.dart';
 import 'package:accompagnateur/view/login_page/login_page_view.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -248,7 +249,9 @@ isCompleted
     
       //
        Future.delayed(Duration.zero, () => showAlert(context));
-       Navigator.pop(context);
+       //Navigator.pop(context);
+         Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => HomePageView()));
 
 }
 

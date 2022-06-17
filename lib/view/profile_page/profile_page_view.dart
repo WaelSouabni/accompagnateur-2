@@ -1,5 +1,6 @@
 
 import 'package:accompagnateur/view/login_page/login_page_view.dart';
+import 'package:accompagnateur/view/messages_List_page/widgets/Message_list.dart';
 import 'package:accompagnateur/view/profile_page/widgets/top_custom_shape.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -56,8 +57,10 @@ class _ProfilePageViewState extends State<ProfilePageView> {
       child:GestureDetector(
               onTap: (){
               // Add what you want to do on tap
-                Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => const MessagePageView()));
+              /*  Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => const MessagePageView()));*/
+            Navigator.push(
+          context, MaterialPageRoute(builder: (context) => const MessageListWidget()));
    
               },
               child: Row(
@@ -121,6 +124,8 @@ class _ProfilePageViewState extends State<ProfilePageView> {
     if(sharedPreferences.getString("token") != null) {
       sharedPreferences.clear();
       sharedPreferences.commit();
+          sharedPreferences.setString(
+        "url", 'http://127.0.0.1:8000/api');
           Navigator.pushReplacement(
           context, MaterialPageRoute(builder: (context) => const LoginPageView()));
    

@@ -53,8 +53,8 @@ class _PaymentState extends State<Payment> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          prenomTextField(),
           nomTextField(),
+          prenomTextField(),
           sexeTextField(),
           phoneTextField(),
           phoneEtrangTextField(),
@@ -73,7 +73,7 @@ class _PaymentState extends State<Payment> {
             SizeConfig.screenHeight! / 68.3,
             SizeConfig.screenWidth! / 20.55,
             SizeConfig.screenHeight! / 34.15),
-        child: TextField(
+        child: TextFormField(
           style: TextStyle(color: textColor),
           cursorColor: textColor,
           controller: prenomController,
@@ -116,7 +116,7 @@ class _PaymentState extends State<Payment> {
             SizeConfig.screenHeight! / 68.3,
             SizeConfig.screenWidth! / 20.55,
             SizeConfig.screenHeight! / 34.15),
-        child: TextField(
+        child: TextFormField(
           style: TextStyle(color: textColor),
           cursorColor: textColor,
           controller: nomController,
@@ -144,7 +144,14 @@ class _PaymentState extends State<Payment> {
               hintStyle: TextStyle(color: texthint.withOpacity(0.3)),
               labelText: 'اسم الثلاثي بالعربية',
               labelStyle: TextStyle(color: texthint.withOpacity(0.6))),
+              validator: (value) {
+              if (value == null || value.isEmpty ||value.length < 8) {
+                return 'الرجاء إدخال إسم ';
+              }
+              return null;
+            },
         ),
+             
       ),
     );
   }
@@ -183,9 +190,10 @@ class _PaymentState extends State<Payment> {
             SizeConfig.screenHeight! / 68.3,
             SizeConfig.screenWidth! / 20.55,
             SizeConfig.screenHeight! / 34.15),
-        child: TextField(
+        child: TextFormField(
           style: TextStyle(color: textColor),
           cursorColor: textColor,
+          keyboardType: TextInputType.phone,
           controller: phoneController,
           onChanged: (text) {
             //print("Text $text");
@@ -211,6 +219,13 @@ class _PaymentState extends State<Payment> {
               hintStyle: TextStyle(color: texthint.withOpacity(0.3)),
               labelText: 'رقم الهاتف',
               labelStyle: TextStyle(color: texthint.withOpacity(0.6))),
+/*               validator: (value) {
+              if (value == null || value.isEmpty ||value.length < 8) {
+                return 'الرجاء إدخال  رقم الهاتف';
+              }
+              return null;
+            }, */
+            validator:(value)=> validateMobile(value),
         ),
       ),
     );
@@ -226,8 +241,9 @@ class _PaymentState extends State<Payment> {
             SizeConfig.screenHeight! / 68.3,
             SizeConfig.screenWidth! / 20.55,
             SizeConfig.screenHeight! / 34.15),
-        child: TextField(
+        child: TextFormField(
           style: TextStyle(color: textColor),
+          keyboardType: TextInputType.phone,
           cursorColor: textColor,
           controller: phoneEtranController,
           onChanged: (text) {
@@ -254,9 +270,29 @@ class _PaymentState extends State<Payment> {
               hintStyle: TextStyle(color: texthint.withOpacity(0.3)),
               labelText: 'رقم الهاتف',
               labelStyle: TextStyle(color: texthint.withOpacity(0.6))),
+             /* validator: (value) {
+              if (value == null || value.isEmpty ||value.length < 8) {
+                return 'الرجاء إدخال  رقم واتساب ';
+              }
+              return null;
+            },*/
+            validator:(value)=> validateMobile(value),
         ),
       ),
     );
   }
 
+//
+
+String? validateMobile(String? value) {
+String patttern = r'(^(?:[+0]9)?[0-9]{10,12}$)';
+RegExp regExp = new RegExp(patttern);
+if (value!.length == 0) {
+       return 'الرجاء إدخال  رقم واتساب ';
+}
+else if (!regExp.hasMatch(value)) {
+      return 'الرجاء إدخال  رقم واتساب ';
+}
+return null;
+}
 }

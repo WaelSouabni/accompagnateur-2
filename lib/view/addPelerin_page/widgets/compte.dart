@@ -81,6 +81,7 @@ class _CompteState extends State<Compte> {
             SizeConfig.screenWidth! / 20.55,
             SizeConfig.screenHeight! / 34.15),
         child: TextField(
+          textAlign: TextAlign.right,
           style: TextStyle(color: textColor),
           cursorColor: textColor,
           controller: nameController,
@@ -124,6 +125,7 @@ class _CompteState extends State<Compte> {
             SizeConfig.screenWidth! / 20.55,
             SizeConfig.screenHeight! / 34.15),
         child: TextField(
+          textAlign: TextAlign.right,
           style: TextStyle(color: textColor),
           cursorColor: textColor,
           controller: mailController,
@@ -167,6 +169,7 @@ class _CompteState extends State<Compte> {
             SizeConfig.screenWidth! / 20.55,
             SizeConfig.screenHeight! / 34.15),
         child:  TextField(
+          textAlign: TextAlign.right,
           obscureText: passwordObscure,
           style: TextStyle(color: textColor),
           controller: passwordController,

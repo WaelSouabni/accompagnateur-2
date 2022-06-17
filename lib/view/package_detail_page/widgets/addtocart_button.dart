@@ -82,12 +82,12 @@ class AddToCartButton extends StatelessWidget {
       }),
     );
         
-if (response.statusCode == 200) {
-       print("ffff");
-      //
+if (response.statusCode == 201) {
+       //print("ffff");
        Future.delayed(Duration.zero, () => showAlert(context));
-       Navigator.pop(context);
-
+}
+else{
+         Future.delayed(Duration.zero, () => showAlertError(context));
 }
    }
         void showAlert(BuildContext context) {
@@ -95,6 +95,23 @@ if (response.statusCode == 200) {
         context: context,
         builder: (context) => AlertDialog(
               content: Text("تم تسجيلك بنجاح"),
+              actions: <Widget>[
+                // usually buttons at the bottom of the dialog
+                new FlatButton(
+                  child: new Text("غلق"),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            ));
+  }
+  //
+          void showAlertError(BuildContext context) {
+    showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+              content: Text("لم تتمكن من المشاركة"),
               actions: <Widget>[
                 // usually buttons at the bottom of the dialog
                 new FlatButton(

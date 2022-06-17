@@ -56,21 +56,21 @@ class _AccompgnateurDetailState extends State<AccompgnateurDetail> {
             crossAxisAlignment:
             CrossAxisAlignment.start,
             children: [
-              Text(
-                widget.prenomArabe!+" "+widget.nomArabe!,
+                Align(alignment: Alignment.centerRight, child: Text(
+                widget.nomArabe!+" "+widget.prenomArabe!,
                 style: TextStyle(
                     color: Colors.black54,
-                    fontSize: SizeConfig.screenHeight!/34.15,          /// 20.0
+                    fontSize: SizeConfig.screenHeight!/50,          /// 20.0 34.15
                     fontWeight: FontWeight.w700),
-              ),
-              Text(
-                "${widget.telephoneTunisien!}",
+              ),),
+               Align(alignment: Alignment.centerRight, child:Text(
+                "${widget.telephoneEtranger!}",
                 style: TextStyle(
                     color: Colors.black38,
                     fontSize: SizeConfig.screenHeight!/42.69,         /// 16
                     fontWeight: FontWeight.w400),
-              ),
-              Padding(
+              ),),
+             /* Padding(
                 padding:
                 EdgeInsets.only(top: SizeConfig.screenHeight!/136.6),  /// 5.0
                 child: Text(
@@ -80,7 +80,7 @@ class _AccompgnateurDetailState extends State<AccompgnateurDetail> {
                       fontSize: SizeConfig.screenHeight!/37.95,        /// 18
                       fontWeight: FontWeight.bold),
                 ),
-              ),
+              ),*/
             ],
           ),
         )

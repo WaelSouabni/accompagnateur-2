@@ -4,7 +4,9 @@ import 'package:accompagnateur/view/bottom_navigator.dart';
 import 'package:accompagnateur/view/checkout_page/widgets/address.dart';
 import 'package:accompagnateur/view/checkout_page/widgets/background_image.dart';
 import 'package:accompagnateur/view/checkout_page/widgets/payment.dart';
-import 'package:accompagnateur/view/login_page/login_page_view.dart';
+import 'package:accompagnateur/view/home_page/home_page_view.dart';
+
+
 import 'package:flutter/material.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
@@ -27,22 +29,8 @@ class _CheckoutPageViewState extends State<CheckoutPageView> {
   int currentStep = 0;
   bool isCompleted = false;
   late SharedPreferences sharedPreferences;
-
+  final _formKey = GlobalKey<FormState>();
   //
-   checkLoginStatus() async {
-    sharedPreferences = await SharedPreferences.getInstance();
-    if(sharedPreferences.getString("token") == null) {
-          Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => const LoginPageView()));    }
-          
- 
-
-  }
-   @override
-  void initState() {
-    checkLoginStatus();  
-    super.initState();
-  }
 
   //
  
@@ -75,7 +63,8 @@ class _CheckoutPageViewState extends State<CheckoutPageView> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.white,
-        body: SingleChildScrollView(
+        body:  Form(//SingleChildScrollView
+          key: _formKey,
         child: Column(
           children: [
           BackgroundImage(),
@@ -93,10 +82,9 @@ isCompleted
                     final isLastStep = currentStep == getSteps().length - 1;
                     if (isLastStep) {
                       setState(() => isCompleted = true);
-                      //print("Completed");
-
                       /// send data to server
                       ajouterAccompgnateur();
+                
                     } else {
                       /// code
                     }
@@ -228,12 +216,38 @@ isCompleted
         'etat': '0',
       }),
     );
-        Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => MyHomePage()));
+
+          if (response.statusCode == 200) {
+    
+      //
+       Future.delayed(Duration.zero, () => showAlert(context));
+       //Navigator.pop(context);
+ Navigator.pushReplacement(
+                context, MaterialPageRoute(builder: (context) => MyHomePage()));
+  
+}
+       
     } else {
       Navigator.pushReplacement(
           context, MaterialPageRoute(builder: (context) => CheckoutPageView()));
     }
   
   }
+    void showAlert(BuildContext context) {
+    showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+              content: Text("تم تسجيل هذا المعتمر بنجاح"),
+              actions: <Widget>[
+                // usually buttons at the bottom of the dialog
+                new FlatButton(
+                  child: new Text("غلق"),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            ));
+  }
+
 }
