@@ -15,16 +15,24 @@ class PelerinListWidget extends StatefulWidget {
 }
 
 class _PelerinListState extends State<PelerinListWidget> {
-  @override
+   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-          BackgroundImage(),
-          Padding(
+      appBar: AppBar(
+        centerTitle: true,
+        title: Text(
+         "قائمة المعتمرين التابعين لك",
+          style: TextStyle(color: Colors.white),
+        ),leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Color.fromARGB(255, 0, 0, 0)),
+          onPressed: () => Navigator.pop(context),
+        ),
+        elevation: 0,
+        backgroundColor: Color.fromARGB(255, 10, 81, 161),
+        iconTheme: IconThemeData(color: Colors.black),
+      ),
+      body: Padding(
         padding: EdgeInsets.symmetric(horizontal: SizeConfig.screenWidth! / 20),
         child: FutureBuilder<List<Pelerin>>(
             future: bringThePelerinAccompgnateur(),
@@ -74,14 +82,14 @@ class _PelerinListState extends State<PelerinListWidget> {
                               children: [
                                 SizedBox(
                                     width: SizeConfig.screenWidth! / 20.55),
-
+                                Spacer(),
                                 /// 20.0
                                 PelerinText(
                                     PelerinName: Accompgnateur.nomArabe +
                                         " " +
                                         Accompgnateur.prenomArabe,
-                                    PelerinEtat: Accompgnateur.etat),
-                                Spacer(),
+                                    PelerinEtat: Accompgnateur.etat, telephone: Accompgnateur.telephoneTunisien,),
+                                
                                 PelerinImage(
                                     PelerinImg:
                                         "main/pngkey.com-profile-icon-png-2024792.png"),
@@ -106,10 +114,6 @@ class _PelerinListState extends State<PelerinListWidget> {
                 ));
               }
             }),
-      ),
-
-          ],
-        ),
       ),
     );
   }

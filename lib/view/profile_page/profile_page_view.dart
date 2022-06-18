@@ -1,6 +1,8 @@
 
 import 'package:accompagnateur/view/login_page/login_page_view.dart';
 import 'package:accompagnateur/view/messages_List_page/widgets/Message_list.dart';
+import 'package:accompagnateur/view/password_page/password_page_view.dart';
+import 'package:accompagnateur/view/pelerins_List_page/cart_view.dart';
 import 'package:accompagnateur/view/profile_page/widgets/top_custom_shape.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -39,7 +41,8 @@ class _ProfilePageViewState extends State<ProfilePageView> {
           TopCustomShape(),
           SizedBox(height: SizeConfig.screenHeight!/34.15,),                              /// 20.0
           MessageSection(icon_name: Icons.message, section_text: " ترك رسالة"),
-          pelerinsSection(icon_name: Icons.shopping_basket, section_text: "قائمة الاشتراكات القديمة"),
+          pelerinsSection(icon_name: Icons.shopping_basket, section_text: "قائمة المعتمرين التابعين لك "),
+          PasswordSection(icon_name: Icons.edit, section_text: "تغير كلمة المرور"),
           SeDeconnecterSection(icon_name: Icons.close,section_text: "الخروج"),
         ],
       ),
@@ -57,10 +60,10 @@ class _ProfilePageViewState extends State<ProfilePageView> {
       child:GestureDetector(
               onTap: (){
               // Add what you want to do on tap
-              /*  Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => const MessagePageView()));*/
-            Navigator.push(
-          context, MaterialPageRoute(builder: (context) => const MessageListWidget()));
+               Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => const MessagePageView()));
+           /* Navigator.push(
+          context, MaterialPageRoute(builder: (context) => const MessageListWidget()));*/
    
               },
               child: Row(
@@ -89,7 +92,8 @@ class _ProfilePageViewState extends State<ProfilePageView> {
       ),
       child:GestureDetector(
               onTap: (){
-         
+            Navigator.push(
+          context, MaterialPageRoute(builder: (context) => const PelerinsListView()));
               },
               child: Row(
                     children: [
@@ -104,7 +108,33 @@ class _ProfilePageViewState extends State<ProfilePageView> {
     );
  
   }
-
+//
+  PasswordSection({required IconData icon_name, required String section_text}) {
+     return Padding(
+      padding: EdgeInsets.fromLTRB(
+          SizeConfig.screenWidth!/13.7,          /// 30.0
+          0,
+          SizeConfig.screenWidth!/27.4,          /// 15.0
+          SizeConfig.screenHeight!/34.15         /// 20.0
+      ),
+      child:GestureDetector(
+              onTap: (){
+            Navigator.push(
+          context, MaterialPageRoute(builder: (context) => const PasswordPageView()));
+              },
+              child: Row(
+                    children: [
+                      Icon(icon_name, color: Colors.black54,),
+                      SizedBox(width: SizeConfig.screenWidth!/41.1,),
+                      Text(section_text, style: TextStyle(color: Colors.black54, fontSize: SizeConfig.screenHeight!/42.68),),      /// 16
+                      Spacer(),
+                      Icon(Icons.keyboard_arrow_right, color: Colors.black45,size: SizeConfig.screenHeight!/21.34,)                /// 32
+                    ],
+                  ),
+            ),
+    );
+ 
+  }
 //
 
  SeDeconnecterSection({required IconData icon_name, required String section_text}) {

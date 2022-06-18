@@ -5,7 +5,8 @@ import 'package:flutter/material.dart';
 class PelerinText extends StatefulWidget {
   String PelerinName;
   String PelerinEtat;
-  PelerinText({Key? key, required this.PelerinName, required this.PelerinEtat}) : super(key: key);
+  String telephone;
+  PelerinText({Key? key, required this.PelerinName, required this.PelerinEtat,required this.telephone}) : super(key: key);
 
   @override
   _PelerinTextState createState() => _PelerinTextState();
@@ -22,20 +23,45 @@ class _PelerinTextState extends State<PelerinText> {
           style: TextStyle(color: Colors.black, fontSize: SizeConfig.screenHeight!/42.69),                 /// 16
           maxLines: 2,
         ),
-        SizedBox(height: SizeConfig.screenHeight!/341.5),        /// 2.0
-        Text.rich(
+        SizedBox(height: SizeConfig.screenHeight!/341.5),
+        (widget.PelerinEtat== '1')
+                ?         Text.rich(
           TextSpan(
-            text: "\$${widget.PelerinEtat}",
+            text:  "في إنتظار",
             style: TextStyle(
                 fontWeight: FontWeight.w600, color: buttonColor, fontSize: SizeConfig.screenHeight!/37.95   /// 18
             ),
             children: [
               TextSpan(
-                  text: " x 1",
+                  text: " ${widget.telephone}",
                   style: Theme.of(context).textTheme.bodyText1),
             ],
-          ),
-        ),
+          )):  (widget.PelerinEtat== '2')
+                ?    Text.rich(
+          TextSpan(
+            text:  " مؤكد",
+            style: TextStyle(
+                fontWeight: FontWeight.w600, color: buttonColor, fontSize: SizeConfig.screenHeight!/37.95   /// 18
+            ),
+            children: [
+              TextSpan(
+                  text: " ${widget.telephone}",
+                  style: Theme.of(context).textTheme.bodyText1),
+            ],
+          )):Text.rich(
+          TextSpan(
+            text:  " مرفوض",
+            style: TextStyle(
+                fontWeight: FontWeight.w600, color: buttonColor, fontSize: SizeConfig.screenHeight!/37.95   /// 18
+            ),
+            children: [
+              TextSpan(
+                  text: " ${widget.telephone}",
+                  style: Theme.of(context).textTheme.bodyText1),
+            ],
+          )),      /// 2.0
+
+        
       ],
     );
   }
