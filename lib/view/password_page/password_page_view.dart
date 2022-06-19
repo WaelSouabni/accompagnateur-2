@@ -25,7 +25,8 @@ class PasswordPageView extends StatefulWidget {
 class _PasswordPageViewState extends State<PasswordPageView> {
   final TextEditingController passwordController = new TextEditingController();
     late SharedPreferences sharedPreferences;
-     bool passwordObscure = true;
+    bool passwordObscure = true;
+    final _formKey = GlobalKey<FormState>();
      checkLoginStatus() async {
     sharedPreferences = await SharedPreferences.getInstance();
     if(sharedPreferences.getString("token") == null) {
@@ -46,7 +47,8 @@ class _PasswordPageViewState extends State<PasswordPageView> {
     return Scaffold(
         backgroundColor: Colors.white,
         body: Container(
-          child: SingleChildScrollView(
+          child:Form(//SingleChildScrollView
+          key: _formKey,
             child: Column(
               children: [
                 const BackgroundImage(),
@@ -164,8 +166,10 @@ class _PasswordPageViewState extends State<PasswordPageView> {
           ),
           onPressed: () {
            // Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPageView()));
+                     if (_formKey.currentState!.validate()) {
                _Registre(
                 passwordController.text,);
+                }
           },
           child: Text(
             "إرسال",
